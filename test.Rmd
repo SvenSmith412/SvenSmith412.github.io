@@ -1,0 +1,39 @@
+---
+output:
+  html_document:
+    toc: yes
+    toc_float:
+      collapsed: false
+pagetitle: ContactInfo
+---
+
+### Projects:
+
+[Example Analysis Project]()
+
+
+___
+
+
+### Course Assignments:
+
+___
+
+### Resumé
+
+[Resumé](https://github.com/SvenSmith412/SvenSmith412.github.io/blob/master/Steven_Resum%C3%A9_2021.docx)
+
+___
+
+### Contact Info:
+
+___
+
+Steven Smith
+
+steven.smith@aruplab.com
+
+Change
+
+
+
