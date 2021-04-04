@@ -9,7 +9,7 @@ pagetitle: ContactInfo
 
 ### Projects:
 
-[Example Analysis Project]()
+[Example Analysis Project](https://svensmith412.github.io/)
 
 
 ___
@@ -33,7 +33,33 @@ Steven Smith
 
 steven.smith@aruplab.com
 
-Change
 
+___
 
+### Course Assignments:
+
+[Assignment 8](https://raw.githubusercontent.com/SvenSmith412/Data_Course_SMITH/main/Assignments/Assignment_8/Assignment_8.html)
+
+___
+
+Band Pages
+[Caladan Brood Official](https://caladanbrood.bandcamp.com/album/echoes-of-battle)
+[Caladan Brood Metal Archives](https://www.metal-archives.com/bands/Caladan_Brood/3540359903)
+[Ered Wethrin](https://eredwethrin.bandcamp.com/)
+[Ered Wethrin Metal Archives](https://www.metal-archives.com/bands/Ered_Wethrin/3540372957)
+[Winterlore](https://winterlore.bandcamp.com/)
+[Winterlore Metal Archives](https://www.metal-archives.com/bands/Winterlore/58061)
+
+___
+
+### Ignore code
+
+..cd Desktop/
+..mkdir asdf
+..cd asdf/
+..touch index.html  ..index.rmd ..asdf.Rproj
+
+..mkdir Projects
+..cd Projects
+..touch index.rmd
 
