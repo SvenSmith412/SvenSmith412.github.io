@@ -25,7 +25,7 @@ div.gray { background-color:#aabdaf; border-radius: Spx; padding: 20px;}
 
 [Project Tidy Data](https://github.com/SvenSmith412/SvenSmith412.github.io/blob/master/Final_Tidy_Data.csv)
 
-
+[Gene Annotation]()
 ___
 
 
@@ -35,13 +35,11 @@ ___
 
 ### Resumé
 
-[Resumé](https://github.com/SvenSmith412/SvenSmith412.github.io/blob/master/Steven_Resum%C3%A9_2021.docx)
+[Resumé](https://github.com/SvenSmith412/SvenSmith412.github.io/blob/master/Steven_Resum%C3%A9_2021.docx){target="_blank"}
 
 ___
 
 ### Contact Info:
-
-___
 
 Steven Smith
 
@@ -52,18 +50,19 @@ ___
 
 ### Course Assignments:
 
-[Assignment 8](https://raw.githubusercontent.com/SvenSmith412/Data_Course_SMITH/main/Assignments/Assignment_8/Assignment_8.html)
+[Assignment 8](https://raw.githubusercontent.com/SvenSmith412/Data_Course_SMITH/main/Assignments/Assignment_8/Assignment_8.html){target="_blank"}
 
 ___
 
-### Band Pages
-[Caladan Brood Official](https://caladanbrood.bandcamp.com/album/echoes-of-battle)
-[Caladan Brood Metal Archives](https://www.metal-archives.com/bands/Caladan_Brood/3540359903)
-[Ered Wethrin](https://eredwethrin.bandcamp.com/)
-[Ered Wethrin Metal Archives](https://www.metal-archives.com/bands/Ered_Wethrin/3540372957)
-[Winterlore](https://winterlore.bandcamp.com/)
-[Winterlore Metal Archives](https://www.metal-archives.com/bands/Winterlore/58061)
-[Caladan Brood -Book of the Fallen](https://www.youtube.com/watch?v=KUlvIq-TDGI)
+### My Band Pages and Info
+[Caladan Brood Official](https://caladanbrood.bandcamp.com/album/echoes-of-battle){target="_blank"}
+[Caladan Brood Metal Archives](https://www.metal-archives.com/bands/Caladan_Brood/3540359903){target="_blank"}
+[Ered Wethrin](https://eredwethrin.bandcamp.com/){target="_blank"}
+[Ered Wethrin Metal Archives](https://www.metal-archives.com/bands/Ered_Wethrin/3540372957){target="_blank"}
+[Winterlore](https://winterlore.bandcamp.com/){target="_blank"}
+[Winterlore Metal Archives](https://www.metal-archives.com/bands/Winterlore/58061){target="_blank"}
+[Caladan Brood -Book of the Fallen](https://www.youtube.com/watch?v=KUlvIq-TDGI){target="_blank"}
+
 ___
 
 ### Ignore code
