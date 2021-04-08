@@ -13,7 +13,6 @@ library(broom)
 library(modelr)
 library(GGally)
 dfmush <- read_csv("../../Data_Course_SMITH/Data/mushroom_growth.csv")
-getwd
 ```
 
 This data set was collected to determine the fastest conditions for growing Oyster Mushrooms for a farmer's market.
@@ -24,7 +23,9 @@ The variables measured were:
 names(dfmush)
 ```
 
-```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.height=3,fig.width=3}
+Take a quick look at our data
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.height=4,fig.width=4}
 ggpairs(dfmush)
 ```
 
@@ -41,14 +42,14 @@ mod2 <- glm(data = dfmush,
 
 Our model formulae are:
 
-```{r,echo=FALSE}
+```{r,echo=FALSE,message=FALSE}
 paste0("MOD1: ", mod1$call[2])
 paste0("MOD2: ", mod2$call[2])
 ```
 
 Which one is better?
 
-```{r,echo=FALSE}
+```{r,echo=FALSE,message=FALSE}
 rmse_mod1 <- residuals(mod1)^2 %>% mean() %>% sqrt()
 rmse_mod2 <- residuals(mod2)^2 %>% mean() %>% sqrt()
 
@@ -63,15 +64,14 @@ add_predictions(dfmush, mod1) %>%
   ggplot(aes(x=Light,color=Humidity)) +
   geom_point(aes(y=GrowthRate),alpha=.25) +
   geom_point(aes(y=pred),size=5) +
-  theme_bw +
+  theme_bw() +
   labs(caption = "Large points aare model predictions")
 ```
 
 It appears that for each species, increasing light amount will yield faster growth
 
-```{r,echo=FALSE}
-tidy(mod1)
-kableExtra::kable()
+```{r,echo=FALSE,message=FALSE}
+kableExtra::kable(tidy(mod1))
 
 ```
 
