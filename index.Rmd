@@ -23,7 +23,7 @@ div.gray { background-color:#aabdaf; border-radius: Spx; padding: 20px;}
 
 ### Projects:
 
-[Example Project](https://github.com/SvenSmith412/SvenSmith412.github.io/blob/master/example_project/){target="_blank"}
+[Example Project](https://github.com/SvenSmith412/SvenSmith412.github.io/blob/master/example_project/index.html){target="_blank"}
 
 [Project Tidy Data](https://github.com/SvenSmith412/SvenSmith412.github.io/blob/master/Final_Tidy_Data.csv){target="_blank"}
 
