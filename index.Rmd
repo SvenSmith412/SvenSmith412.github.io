@@ -29,6 +29,8 @@ div.gray { background-color:#aabdaf; border-radius: Spx; padding: 20px;}
 
 [Gene Annotation](https://github.com/SvenSmith412/SvenSmith412.github.io/blob/master/gene_annotation/Annotation%20Project%20Completed.pdf){target="_blank"}
 
+[Final Project 3100](https://github.com/SvenSmith412/SvenSmith412.github.io/blob/master/final_project_3100/Final_SMITH.html){target="_blank"}
+
 ___
 
 
