@@ -229,7 +229,7 @@ summary(mod3)
 sqrt(mean(residuals(mod3)^2))
 ```
 ### Minutes vs 3-point %
-```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.height=6,fig.width=6}
+```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.height=4,fig.width=6}
 ggplot(mod3,aes(x=season)) + geom_point(aes(y=mp),color="Blue",alpha=.25) +
   theme_minimal() + facet_wrap(~player) +  geom_smooth(aes(y=mp),method="lm") +
   theme(axis.text.x=element_text(angle=60,hjust=1)) +
@@ -239,4 +239,13 @@ ggplot(Full_Data,aes(x=season)) + geom_point(aes(y=x3p_percent),color="Blue",alp
   theme_minimal() + facet_wrap(~player) +
   theme(axis.text.x=element_text(angle=60,hjust=1)) +
   labs(y= "Three Point %")
+```
+
+### Interactions of player, position, and season on 3-point %
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+mod4<- glm(data=Full_Data,
+                formula = x3p_percent ~ player * pos * season)
+summary(mod4)
+
+sqrt(mean(residuals(mod4)^2))
 ```
