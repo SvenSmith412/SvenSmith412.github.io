@@ -17,9 +17,9 @@ pagetitle: ContactInfo
 </style>
 
 <style>
-div.gray { background-color:#aabdaf; border-radius: Spx; padding: 20px;}
+div.red { background-color:#e0adb2; border-radius: Spx; padding: 20px;}
 </style>
-<div class = "gray">
+<div class = "red">
 
 ### Projects:
 
@@ -29,12 +29,8 @@ div.gray { background-color:#aabdaf; border-radius: Spx; padding: 20px;}
 
 [Gene Annotation](https://github.com/SvenSmith412/SvenSmith412.github.io/blob/master/gene_annotation/Annotation%20Project%20Completed.pdf){target="_blank"}
 
-[Final Project 3100](https://github.com/SvenSmith412/SvenSmith412.github.io/blob/master/final_project_3100/Final_SMITH.html){target="_blank"}
+[Final Project 3100: RStudio Data Analysis](https://github.com/SvenSmith412/SvenSmith412.github.io/blob/master/final_project_3100/Final_SMITH.html){target="_blank"}
 
-___
-
-
-### Nothing yet
 
 ___
 
@@ -47,6 +43,7 @@ ___
 ### Contact Info:
 
 Steven Smith
+(801)604-1677
 
 steven.smith@aruplab.com
 panzerfaust412@hotmail.com
@@ -70,15 +67,5 @@ ___
 
 ___
 
-### Ignore code below
-
-..cd Desktop/
-..mkdir asdf
-..cd asdf/
-..touch index.html  ..index.rmd ..asdf.Rproj
-
-..mkdir Projects
-..cd Projects
-..touch index.rmd
 
 
