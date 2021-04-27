@@ -100,7 +100,7 @@ names(Full_Data) <- names(Full_Data) %>% make_clean_names()
 ```
 ### In this project, I wanted to look and see if 3-point percentages had increased over the years, as it seems volume certainly has. So I randomly selected 15 players who have played at least 8 seasons, have a 15-minute/game average for their careers and average at least  7.0 points per game. Random.org was used to generate the team to pull from, then again to select a player.
 
-### A Look at Player Shooting per Season
+### Just a quick look at player shooting per season
 ```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.height=5,fig.width=5}
 ggplot(Full_Data,aes(x=season)) + geom_point(aes(y=fga,color="Red"),alpha=.5) +
   geom_point(aes(y=fg),color="Green",size=1.5) + theme_minimal() + geom_smooth(aes(y=fg),method="lm") +
@@ -185,6 +185,7 @@ mod2 <- glm(data=Full_Data,
             formula = x3p_percent ~ season * player * x3pa)
 sqrt(mean(residuals(mod2)^2))
 summary(mod2)
+
 ```
 
 ##### This is the mod that displays great significance of our categories' correlation to 3-point shooting and the mod shows good residuals  compared to other categorical interactions. 'Players' shows a lot of significance, as well as certain seasons they played.
