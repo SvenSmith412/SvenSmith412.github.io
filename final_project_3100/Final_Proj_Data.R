@@ -7,7 +7,7 @@ library(patchwork)
 library(tidyr)
 library(ggplot2)
 library(skimr)
-install.packages("lmrTest")
+#install.packages("lmrTest")
 library(lmrTest)
 library(GGally)
 library(dplyr)
@@ -126,18 +126,18 @@ report(mod2)
 ggplot(mod1,aes(x=season)) + geom_point(aes(y=x3p_percent),color="Blue",alpha=.25) +
   theme_minimal() + facet_wrap(~player) +  geom_smooth(aes(y=x3p_percent),method="lm") +
   theme(axis.text.x=element_text(angle=60,hjust=1)) +
-  labs(y= "Three Point %")
+  labs(y= "Three Point %",x="Season")
 
 ggplot(mod2,aes(x=season)) + geom_point(aes(y=x3p_percent),color="Blue",alpha=.25) +
   theme_minimal() + facet_wrap(~player) +  geom_smooth(aes(y=x3p_percent),method="lm") +
   theme(axis.text.x=element_text(angle=60,hjust=1)) +
-  labs(y= "Three Point %")
+  labs(y= "Three Point %",x="Season")
 
 ggplot(mod2,aes(x=season)) + geom_point(aes(y=x3p_percent),color="Blue",alpha=.25) +
   geom_point(aes(y=x3pa),color="Red") +
   theme_minimal() + facet_wrap(~player,scales = "free_y") +  geom_smooth(aes(y=x3p_percent),method="lm") +
   theme(axis.text.x=element_text(angle=60,hjust=1)) +
-  labs(y= "3-Pointers Taken and Made")
+  labs(y= "3-Pointers Taken and Made",x="Season")
 
 #TukeyHSD(mod1) %>% plot()
 
@@ -145,7 +145,7 @@ ggplot(mod2,aes(x=season)) + geom_point(aes(y=x3p_percent),color="Blue",alpha=.2
 ggplot(Full_Data,aes(x=season)) + geom_point(aes(y=fga,color="Red"),alpha=.5) +
   geom_point(aes(y=fg),color="Green",size=1.5) + theme_minimal() + geom_smooth(aes(y=fg),method="lm") +
   theme(axis.text.x=element_text(angle=60,hjust=1)) + facet_wrap(~player) + geom_smooth(aes(y=fga),method="lm")+
-  labs(y= "Field Goals Made and Attempted per Season")
+  labs(y= "Field Goals Made and Attempted per Season",x="Season")
 
 mod_fg_percent <- glm(data=Full_Data,
             formula = fg_percent ~ season * player * fga)
@@ -157,14 +157,14 @@ add_predictions(Full_Data,mod1) %>%
   geom_point(aes(y=x3p_percent),color="Green",size=1.5) +
   geom_point(aes(y=pred),color="Red",size=2,alpha=.5) +
   facet_wrap(~player) +
-  labs(y= "Three Point %")
+  labs(y= "Three Point %",x="Season")
 
 add_predictions(Full_Data,mod2) %>% 
   ggplot(aes(x=season)) + geom_point(aes(y=x3p_percent),alpha=.5) +
   geom_point(aes(y=x3p_percent),color="Green",size=1.5) +
   geom_point(aes(y=pred),color="Red",size=2,alpha=.5) +
   facet_wrap(~player) +
-  labs(y= "Three Point %")
+  labs(y= "Three Point %",x="Season")
 
 
 #Adding Predictions####
@@ -177,7 +177,9 @@ df1[,c("x3p_percent","pred")] %>% head()
 
 players <- rep(unique(Full_Data$player),each=4)
 length(players)
-seasons <- rep(c(2021,2022,2022,2023),15)
+seasons <- rep(c(2021,2022,2023,2024),15)
+seasons <- as.numeric(seasons)
+class(seasons)
 x3pa <- Full_Data
 
 threepointattempt <- Full_Data %>% 
@@ -186,14 +188,15 @@ threepointattempt <- Full_Data %>%
 threepa <- rep(threepointattempt$mean3pa,each=4)
 
 
-newdf = data.frame(season = c(2021,2022,2022,2023),
+newdf = data.frame(season = c(2021,2022,2023,2024),
                    player = players,
                    x3pa = threepa)
 
 add_predictions(newdf,mod2) %>% 
   ggplot(aes(x=season,y=pred)) +
   geom_point() + geom_smooth(method="lm") + theme(axis.text.x=element_text(angle=60,hjust=1)) +
-  facet_wrap(~player,scales = "free")
+  facet_wrap(~player,scales = "free") + 
+  labs(y= "Three Point % Predictions",x="Future Seasons")
                     
 # anything specified in the model needs to be here with exact matching column names
 
@@ -241,7 +244,7 @@ sqrt(mean(residuals(mod3)^2))
 ggplot(mod3,aes(x=season)) + geom_point(aes(y=mp),color="Blue",alpha=.25) +
   theme_minimal() + facet_wrap(~player) +  geom_smooth(aes(y=mp),method="lm") +
   theme(axis.text.x=element_text(angle=60,hjust=1)) +
-  labs(y= "Minutes per Game")
+  labs(y= "Minutes per Game", x="Season")
 
 mod4<- glm(data=Full_Data,
                 formula = x3p_percent ~ player * pos * season)
@@ -255,5 +258,4 @@ saveRDS(Full_Data, "./full_cleaned_project_data.RDS")
 summary(mod2)
 
 report(mod2)
-
 

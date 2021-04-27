@@ -1,7 +1,7 @@
 ---
 title: "Project3100"
 author: "Steven Smith"
-date: "4/22/2021"
+date: "4/27/2021"
 output: html_document
 ---
 
@@ -97,70 +97,89 @@ Full_Data <- Full_Data %>%
 
 names(Full_Data) <- names(Full_Data) %>% make_clean_names()
 
-
-
-
 ```
+### In this project, I wanted to look and see if 3-point percentages had increased over the years, as it seems volume certainly has. So I randomly selected 15 players who have played at least 8 seasons, have a 15-minute/game average for their careers and average at least  7.0 points per game. Random.org was used to generate the team to pull from, then again to select a player.
+
 ### A Look at Player Shooting per Season
 ```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.height=5,fig.width=5}
 ggplot(Full_Data,aes(x=season)) + geom_point(aes(y=fga,color="Red"),alpha=.5) +
   geom_point(aes(y=fg),color="Green",size=1.5) + theme_minimal() + geom_smooth(aes(y=fg),method="lm") +
   theme(axis.text.x=element_text(angle=60,hjust=1)) + facet_wrap(~player) + geom_smooth(aes(y=fga),method="lm")+
-  labs(y= "Field Goals Made and Attempted per Season")
+  labs(y= "Field Goals Made and Attempted per Season", x="Season")
 ```
 
-### A look into overall shooting
+### Red shows field goal attempts and green shows field goals made
+
+### A look into overall shooting finds no significance between the interaction of season, player and field goal attempts
+
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 mod_fg_percent <- glm(data=Full_Data,
             formula = fg_percent ~ season * player * fga)
 sqrt(mean(residuals(mod_fg_percent)^2))
-summary(mod_fg_percent)
+formula(mod_fg_percent)
 ```
-### 3-Point Shooting for all players over their seasons
+
+### 3-Point Shooting for all players over their seasons. We see a shooting volume increase, which help foment the hypothesis that the league might be shooting better from distance.
+
 ```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.height=5,fig.width=5}
 ggplot(Full_Data,aes(x=season)) + geom_point(aes(y=x3p_percent),color="Blue",alpha=.25) +
   geom_point(aes(y=x3pa),color="Red") + geom_point(aes(y=x3p),color="Green") +
   theme_minimal() +  geom_smooth(aes(y=x3p_percent),method="lm") +
   theme(axis.text.x=element_text(angle=60,hjust=1)) +
-  labs(y= "3-Pointers Taken, Made, and %")
+  labs(y= "3-Pointers Taken, Made, and %",x="Season")
 ```
+
+#### Red = 3-pointers attempted, green = 3-pointers made, and the blue line indicates 3-point %. For percentages 1 on the graph would = 100% shooting
+
 ### Now for each player
+
 ```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.height=5,fig.width=5}
 ggplot(Full_Data,aes(x=season)) + geom_point(aes(y=x3p_percent),color="Blue",alpha=.25) +
   geom_point(aes(y=x3pa),color="Red") + geom_point(aes(y=x3p),color="Green") +
   theme_minimal() + facet_wrap(~player,scales = "free_y") +  geom_smooth(aes(y=x3p_percent),method="lm") +
   theme(axis.text.x=element_text(angle=60,hjust=1)) +
-  labs(y= "3-Pointers Taken, Made, and %")
+  labs(y= "3-Pointers Taken, Made, and %", x="Season")
 ```
 
-### Shooting Percentages for players
+#### Red = 3-pointers missed, green = 3-pointers made, and the blue line indicates 3-point %
+
+### 3-Point percentages for players
+
 ```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.height=5,fig.width=5}
 ggplot(Full_Data,aes(x=season)) + geom_point(aes(y=x3p_percent),color="Blue",alpha=.25) +
   theme_minimal() + facet_wrap(~player) +
   theme(axis.text.x=element_text(angle=60,hjust=1)) +
-  labs(y= "Three Point %")
+  labs(y= "Three Point %",x="Season")
 ```
-___
+
+##### 0.1 is 10% and 0.5 Is 50% shooting
 
 
 ## Analyzing interaction of season and player on 3-point percentages. Significance and residual
+
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 mod1 <- glm(data=Full_Data,
             formula = x3p_percent ~ season * player)
-summary(mod1)
+formula(mod1)
 sqrt(mean(residuals(mod1)^2))
 ```
-### "add_predictions
+
+### Predictions of the above formala
+
 ```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.height=5,fig.width=5}
 add_predictions(Full_Data,mod1) %>% 
   ggplot(aes(x=season)) + geom_point(aes(y=x3p_percent),alpha=.5) +
   geom_point(aes(y=x3p_percent),color="Green",size=1.5) +
   geom_point(aes(y=pred),color="Red",size=2,alpha=.5) +
   facet_wrap(~player) +
-  labs(y= "Three Point %")
+  labs(y= "Three Point %",x="Season")
 ```
 
-#### Analyzing interaction of season, player, and 3-pointers attempted on 3-point percentages. Significance and residual
+##### Predictions in red and 3-point percentage is green
+
+___
+### Now, analyzing interaction of season, player, and 3-pointers attempted on 3-point percentages. Significance and residual
+
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 mod2 <- glm(data=Full_Data,
             formula = x3p_percent ~ season * player * x3pa)
@@ -168,40 +187,55 @@ sqrt(mean(residuals(mod2)^2))
 summary(mod2)
 ```
 
-#### graph
+##### This is the mod that displays great significance of our categories' correlation to 3-point shooting and the mod shows good residuals  compared to other categorical interactions. 'Players' shows a lot of significance, as well as certain seasons they played.
+
+### 3-Point % vs season
+
 ```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.height=5,fig.width=5}
 ggplot(mod2,aes(x=season)) + geom_point(aes(y=x3p_percent),color="Blue",alpha=.25) +
   theme_minimal() + facet_wrap(~player) +  geom_smooth(aes(y=x3p_percent),method="lm") +
   theme(axis.text.x=element_text(angle=60,hjust=1)) +
-  labs(y= "Three Point %")
+  labs(y= "Three Point %",x="Season")
 ```
 
-##### 3-point percentages mod2
+##### Added trend line
+
+### 3-point percentages and attempts per season
+
 ```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.height=5,fig.width=5}
 ggplot(mod2,aes(x=season)) + geom_point(aes(y=x3p_percent),color="Blue",alpha=.25) +
   geom_point(aes(y=x3pa),color="Red") +
   theme_minimal() + facet_wrap(~player,scales = "free_y") +  geom_smooth(aes(y=x3p_percent),method="lm") +
   theme(axis.text.x=element_text(angle=60,hjust=1)) +
-  labs(y= "3-Pointers Taken and Made")
+  labs(y= "3-Pointers Taken and Percentage", x="Season")
 ```
 
-###add_predictions
+##### Red = 3-pointers attempted and blue shows the percentages for each season
+
+### Predictions using the above interacting formula
+
 ```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.height=5,fig.width=5}
-add_predictions(Full_Data,mod2) %>% 
+p1 <- add_predictions(Full_Data,mod2) %>% 
   ggplot(aes(x=season)) + geom_point(aes(y=x3p_percent),alpha=.5) +
   geom_point(aes(y=x3p_percent),color="Green",size=1.5) +
   geom_point(aes(y=pred),color="Red",size=2,alpha=.5) +
   facet_wrap(~player) +
-  labs(y= "Three Point %")
+  labs(y= "Three Point %", x= "Season")
+
+ggplotly(p1)
 ```
 
-```{r,echo=FALSE,message=FALSE,warning=FALSE}
+##### Added predictions = red and green shows 3-point % for each season
+##### We see some upwards trends for specific players. Drummond's volume is to low to really consider for making accurate predictions.
+
+```{r message=FALSE, warning=FALSE, include=FALSE, r,echo=FALSE}
 df1 <- Full_Data %>% 
   add_predictions(mod2) 
 df1[,c("x3p_percent","pred")] %>% head()
 players <- rep(unique(Full_Data$player),each=4)
 length(players)
-seasons <- rep(c(2021,2022,2022,2023),15)
+seasons <- rep(c(2021,2022,2023,2024),15)
+seasons <- as.numeric(seasons)
 x3pa <- Full_Data
 
 threepointattempt <- Full_Data %>% 
@@ -210,42 +244,60 @@ threepointattempt <- Full_Data %>%
 threepa <- rep(threepointattempt$mean3pa,each=4)
 
 
-newdf = data.frame(season = c(2021,2022,2022,2023),
+newdf = data.frame(season = c(2021,2022,2023,2024),
                    player = players,
                    x3pa = threepa)
 ```
-### Predictions
+
+### Predicting into the next 4 future seasons
+
 ```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.height=6,fig.width=6}
 add_predictions(newdf,mod2) %>% 
   ggplot(aes(x=season,y=pred)) +
   geom_point() + geom_smooth(method="lm") + theme(axis.text.x=element_text(angle=60,hjust=1)) +
-  facet_wrap(~player,scales = "free")
+  facet_wrap(~player,scales = "free") +
+  labs(y= "Three Point % Predictions",x="Future Seasons")
 ```
+
+##### We see some strong predictions
+
 ### Interactions of player and minutes per game + season on 3-point %
+
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 mod3 <- glm(data=Full_Data,
             formula = x3p_percent ~ player * mp + season)
-summary(mod3)
+formula(mod3)
 sqrt(mean(residuals(mod3)^2))
 ```
-### Minutes vs 3-point %
+This mod shows us significance
+
+### Minutes and 3-point % vs Seasons
+##### Given a player shoots good or bad, I'd expect a gain or reduction in minutes.
+
 ```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.height=4,fig.width=6}
 ggplot(mod3,aes(x=season)) + geom_point(aes(y=mp),color="Blue",alpha=.25) +
-  theme_minimal() + facet_wrap(~player) +  geom_smooth(aes(y=mp),method="lm") +
+  theme_minimal() + facet_wrap(~player) +  geom_smooth(aes(y=mp),method="lm") +  
   theme(axis.text.x=element_text(angle=60,hjust=1)) +
-  labs(y= "Minutes per Game")
+  labs(y= "Minutes per Game", x="Season")
 
 ggplot(Full_Data,aes(x=season)) + geom_point(aes(y=x3p_percent),color="Blue",alpha=.25) +
-  theme_minimal() + facet_wrap(~player) +
+  theme_minimal() + facet_wrap(~player) + 
   theme(axis.text.x=element_text(angle=60,hjust=1)) +
-  labs(y= "Three Point %")
+  labs(y= "Three Point %", x="Season",x="Season")
 ```
 
+##### We see minutes do have an effect 3-point %, but only for certain players. It appears that a consistently decent 3-point % might a good factor into what's keeping the player playing more minutes. A guy like Andre Drummond, is a traditional big and earns minutes by other methods, but limits spearding the floor like a lot of teams like to do these days.
+___
+
 ### Interactions of player, position, and season on 3-point %
+##### Another aspect to consider would be that of position. Primary ball-handlers, typicaly the guard, might see different kind of shots then say a center, who will likely only take open threes. But a center's body type has typically, in the past, not seen them as finesse players with long distant shooting skills
+
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 mod4<- glm(data=Full_Data,
                 formula = x3p_percent ~ player * pos * season)
-summary(mod4)
+formula(mod4)
 
 sqrt(mean(residuals(mod4)^2))
 ```
+
+##### What could be done in the future is collect mean data from many players at each position and compare those values since there isn't a big enough pool to draw from within this data-set. 
