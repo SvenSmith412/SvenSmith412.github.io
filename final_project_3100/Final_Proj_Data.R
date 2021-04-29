@@ -145,6 +145,7 @@ ggplot(mod2,aes(x=season)) + geom_point(aes(y=x3p_percent),color="Blue",alpha=.2
 ggplot(Full_Data,aes(x=season)) + geom_point(aes(y=fga,color="Red"),alpha=.5) +
   geom_point(aes(y=fg),color="Green",size=1.5) + theme_minimal() + geom_smooth(aes(y=fg),method="lm") +
   theme(axis.text.x=element_text(angle=60,hjust=1)) + facet_wrap(~player) + geom_smooth(aes(y=fga),method="lm")+
+  theme(legend.position="none") +
   labs(y= "Field Goals Made and Attempted per Season",x="Season")
 
 mod_fg_percent <- glm(data=Full_Data,
@@ -255,7 +256,4 @@ sqrt(mean(residuals(mod4)^2))
 #####
 saveRDS(Full_Data, "./full_cleaned_project_data.RDS")
 
-summary(mod2)
-
-report(mod2)
 

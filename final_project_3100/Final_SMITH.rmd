@@ -101,16 +101,17 @@ names(Full_Data) <- names(Full_Data) %>% make_clean_names()
 ### In this project, I wanted to look and see if 3-point percentages had increased over the years, as it seems volume certainly has. So I randomly selected 15 players who have played at least 8 seasons, have a 15-minute/game average for their careers and average at least  7.0 points per game. Random.org was used to generate the team to pull from, then again to select a player.
 
 ### Just a quick look at player shooting per season
+
 ```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.height=5,fig.width=5}
 ggplot(Full_Data,aes(x=season)) + geom_point(aes(y=fga,color="Red"),alpha=.5) +
   geom_point(aes(y=fg),color="Green",size=1.5) + theme_minimal() + geom_smooth(aes(y=fg),method="lm") +
-  theme(axis.text.x=element_text(angle=60,hjust=1)) + facet_wrap(~player) + geom_smooth(aes(y=fga),method="lm")+
+  theme(axis.text.x=element_text(angle=60,hjust=1)) + facet_wrap(~player) + geom_smooth(aes(y=fga),method="lm") + theme(legend.position="none") +
   labs(y= "Field Goals Made and Attempted per Season", x="Season")
 ```
 
-### Red shows field goal attempts and green shows field goals made
+##### Red shows field goal attempts and green shows field goals made
 
-### A look into overall shooting finds no significance between the interaction of season, player and field goal attempts
+### A look into overall shooting using the formula below finds no significance between the interaction of season, player and field goal attempts on percentages
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 mod_fg_percent <- glm(data=Full_Data,
@@ -119,7 +120,7 @@ sqrt(mean(residuals(mod_fg_percent)^2))
 formula(mod_fg_percent)
 ```
 
-### 3-Point Shooting for all players over their seasons. We see a shooting volume increase, which help foment the hypothesis that the league might be shooting better from distance.
+### 3-Point Shooting for all players over their seasons. We see a shooting volume increase, which help foment the hypothesis that the league might be shooting better from distance
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.height=5,fig.width=5}
 ggplot(Full_Data,aes(x=season)) + geom_point(aes(y=x3p_percent),color="Blue",alpha=.25) +
@@ -144,6 +145,7 @@ ggplot(Full_Data,aes(x=season)) + geom_point(aes(y=x3p_percent),color="Blue",alp
 #### Red = 3-pointers missed, green = 3-pointers made, and the blue line indicates 3-point %
 
 ### 3-Point percentages for players
+##### A better look at percentages
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.height=5,fig.width=5}
 ggplot(Full_Data,aes(x=season)) + geom_point(aes(y=x3p_percent),color="Blue",alpha=.25) +
@@ -199,7 +201,7 @@ ggplot(mod2,aes(x=season)) + geom_point(aes(y=x3p_percent),color="Blue",alpha=.2
   labs(y= "Three Point %",x="Season")
 ```
 
-##### Added trend line
+##### Added trend line. We see mostly either positive or flat slopes, a couple negative. This looks like it supports the idea that 3-point percentages may be increasing through the seasons.
 
 ### 3-point percentages and attempts per season
 
@@ -212,6 +214,8 @@ ggplot(mod2,aes(x=season)) + geom_point(aes(y=x3p_percent),color="Blue",alpha=.2
 ```
 
 ##### Red = 3-pointers attempted and blue shows the percentages for each season
+
+##### We definitely see volume increases. But maybe it just became mathematically better to shoot more threes as long as percentages didn't dip, but we do see some more slightly positive increases. Perhaps it was purely mathematical to green light the shooting of more 3-pointers, and players naturally practiced them more and became better at them.
 
 ### Predictions using the above interacting formula
 
@@ -227,7 +231,7 @@ ggplotly(p1)
 ```
 
 ##### Added predictions = red and green shows 3-point % for each season
-##### We see some upwards trends for specific players. Drummond's volume is to low to really consider for making accurate predictions.
+##### We see some upwards trends for specific players. Drummond's volume is to low to really consider for making accurate predictions
 
 ```{r message=FALSE, warning=FALSE, include=FALSE, r,echo=FALSE}
 df1 <- Full_Data %>% 
@@ -260,7 +264,7 @@ add_predictions(newdf,mod2) %>%
   labs(y= "Three Point % Predictions",x="Future Seasons")
 ```
 
-##### We see some strong predictions
+##### We see some strong looking predictions, but be mindful that these are showing small overall percentage changes, but they give us an obvious trend to spot.
 
 ### Interactions of player and minutes per game + season on 3-point %
 
@@ -291,7 +295,7 @@ ggplot(Full_Data,aes(x=season)) + geom_point(aes(y=x3p_percent),color="Blue",alp
 ___
 
 ### Interactions of player, position, and season on 3-point %
-##### Another aspect to consider would be that of position. Primary ball-handlers, typicaly the guard, might see different kind of shots then say a center, who will likely only take open threes. But a center's body type has typically, in the past, not seen them as finesse players with long distant shooting skills
+##### Another aspect to consider would be that of position. Primary ball-handlers, typicaly the guard, might see different kind of shots then say a center, who will likely only take open threes. But a center's body type has typically, in the past, not seen them as finesse players with long distant shooting skills.
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 mod4<- glm(data=Full_Data,
