@@ -23,14 +23,12 @@ div.red { background-color:#e0adb2; border-radius: Spx; padding: 20px;}
 
 ### Projects:
 
-[Example Project](https://github.com/SvenSmith412/SvenSmith412.github.io/blob/master/example_project/index.html){target="_blank"}
-
-[Project Tidy Data](https://github.com/SvenSmith412/SvenSmith412.github.io/blob/master/Final_Tidy_Data.csv){target="_blank"}
 
 [Gene Annotation](https://github.com/SvenSmith412/SvenSmith412.github.io/blob/master/gene_annotation/Annotation%20Project%20Completed.pdf){target="_blank"}
 
 [Final Project 3100: RStudio Data Analysis](https://github.com/SvenSmith412/SvenSmith412.github.io/blob/master/final_project_3100/Final_SMITH.html){target="_blank"}
 
+[Project Tidy Data](https://github.com/SvenSmith412/SvenSmith412.github.io/blob/master/final_project_3100/Final_Tidy_Data.csv){target="_blank"}
 
 ___
 
