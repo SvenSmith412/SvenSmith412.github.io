@@ -256,4 +256,5 @@ sqrt(mean(residuals(mod4)^2))
 #####
 saveRDS(Full_Data, "./full_cleaned_project_data.RDS")
 
+finished
 

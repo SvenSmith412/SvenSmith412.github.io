@@ -230,8 +230,8 @@ p1 <- add_predictions(Full_Data,mod2) %>%
 ggplotly(p1)
 ```
 
-##### Added predictions = red and green shows 3-point % for each season
-##### We see some upwards trends for specific players. Drummond's volume is to low to really consider for making accurate predictions
+##### Added predictions = red, green shows 3-point % for each season
+##### We see some upwards trends for specific players. Drummond's volume is too low to really consider for making accurate predictions. Note, Gordon Hayward attempted and missed a single 3 in the 2017 season before becoming injured that year.
 
 ```{r message=FALSE, warning=FALSE, include=FALSE, r,echo=FALSE}
 df1 <- Full_Data %>% 
